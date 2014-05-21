@@ -14,6 +14,6 @@
 
         public virtual Album Album { get; set; }
 
-        public virtual Order Order { get; set; }
+        public virtual OrderHeader Order { get; set; }
     }
 }
