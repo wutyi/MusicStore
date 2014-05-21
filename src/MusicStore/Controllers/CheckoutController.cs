@@ -33,7 +33,7 @@ namespace MusicStore.Controllers
         // POST: /Checkout/AddressAndPayment
 
         [HttpPost]
-        public async Task<IActionResult> AddressAndPayment(Order order)
+        public async Task<IActionResult> AddressAndPayment(OrderHeader order)
         {
             var formCollection = await Context.Request.GetFormAsync();
 

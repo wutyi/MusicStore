@@ -139,7 +139,7 @@ namespace MusicStore.Models
             return total;
         }
 
-        public int CreateOrder(Order order)
+        public int CreateOrder(OrderHeader order)
         {
             decimal orderTotal = 0;
 
