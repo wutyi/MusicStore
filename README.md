@@ -35,3 +35,4 @@ By default the app runs on desktop CLR. To switch to run the app on CoreCLR foll
 
 ### Note:
 1. Application is started on different ports on different hosts. To change the port or URL modify ```Helios.cmd``` or project.json commands section in case of self-host and customhost.
+2. Comment out k.ini file content by adding a semicolon (;) in front of each line. This will allow ctrl-f5 work correctly if you haven’t installed `kvm`.
