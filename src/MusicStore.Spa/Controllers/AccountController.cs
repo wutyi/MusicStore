@@ -84,7 +84,7 @@ namespace MusicStore.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    await SignInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -99,9 +99,8 @@ namespace MusicStore.Controllers
 
         //
         // GET: /Account/Manage
-        //Bug: https://github.com/aspnet/WebFx/issues/339
         [HttpGet]
-        public IActionResult Manage(ManageMessageId? message)
+        public IActionResult Manage(ManageMessageId? message = null)
         {
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."

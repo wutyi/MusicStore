@@ -1,30 +1,28 @@
-{
-  "compilationOptions": {
-    "define": [
-      "DEBUG"
-    ]
-  },
-  "dependencies": {
-    "Helios": "0.1-alpha-build-0585",
-    "Microsoft.AspNet.Mvc": "0.1-alpha-build-1268",
-    "Microsoft.AspNet.StaticFiles": "0.1-alpha-build-0443",
-    "Microsoft.Data.Entity.Relational": "0.1-alpha-build-0863",
-    "Microsoft.Data.Entity.InMemory": "0.1-alpha-build-0863",
-    "Microsoft.Data.Entity.SqlServer": "0.1-alpha-build-0863",
-    "Microsoft.AspNet.Security.Cookies": "0.1-alpha-build-0506",
-    "Microsoft.AspNet.Identity.Security": "0.1-alpha-build-1059",
-    "Microsoft.AspNet.Identity.Entity": "0.1-alpha-build-1059",
-    "Microsoft.Framework.ConfigurationModel": "0.1-alpha-build-0233",
-    "Microsoft.Framework.ConfigurationModel.Json": "0.1-alpha-build-0233"
-  },
-  "configurations": {
-    "net45": {
-      "dependencies": {
-        "System.Runtime": "",
-        "System.Data": "",
-        "System.ComponentModel.DataAnnotations": ""
-      }
+﻿{
+    "authors": [
+        "Microsoft"
+    ],
+    "description": "Music store application on K as a SPA",
+    "compilationOptions": { "define": [ "DEBUG" ] },
+    "dependencies": {
+        "Microsoft.AspNet.Server.IIS": "1.0.0-alpha2",
+        "Microsoft.AspNet.Mvc": "6.0.0-alpha2",
+        "Microsoft.AspNet.Server.WebListener": "1.0.0-alpha2",
+        "Microsoft.AspNet.StaticFiles": "1.0.0-alpha2",
+        "EntityFramework.InMemory": "7.0.0-alpha2",
+        "EntityFramework.SqlServer": "7.0.0-alpha2",
+        "Microsoft.AspNet.Security.Cookies": "1.0.0-alpha2",
+        "Microsoft.AspNet.Identity.Authentication": "3.0.0-alpha2",
+        "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-alpha2",
+        "Microsoft.Framework.ConfigurationModel": "1.0.0-alpha2",
+        "Microsoft.Framework.ConfigurationModel.Json": "1.0.0-alpha2"
     },
-    "k10": {}
-  }
+    "commands": {
+        "web": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.WebListener --server.urls http://localhost:5002",
+        "run": "run server.urls=http://localhost:5003"
+    },
+    "configurations": {
+        "net451": { },
+        "k10": { }
+    }
 }

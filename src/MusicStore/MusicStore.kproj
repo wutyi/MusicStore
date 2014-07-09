@@ -13,12 +13,6 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'" Label="Configuration">
   </PropertyGroup>
-  <PropertyGroup Condition="$(OutputType) == 'Console'">
-    <DebuggerFlavor>ConsoleDebugger</DebuggerFlavor>
-  </PropertyGroup>
-  <PropertyGroup Condition="$(OutputType) == 'Web'">
-    <DebuggerFlavor>WebDebugger</DebuggerFlavor>
-  </PropertyGroup>
   <PropertyGroup>
     <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
@@ -41,7 +35,6 @@
     <Content Include="Images\logo.svg" />
     <Content Include="Images\placeholder.png" />
     <Content Include="Images\placeholder.svg" />
-    <Content Include="k.ini" />
     <Content Include="LocalConfig.json" />
     <Content Include="Project.json" />
     <Content Include="Scripts\bootstrap.js" />

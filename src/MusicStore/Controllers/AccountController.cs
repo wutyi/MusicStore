@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Security;
 using Microsoft.AspNet.Mvc;
-using Microsoft.AspNet.Mvc.ModelBinding;
 using MusicStore.Models;
 using System.Security.Principal;
 using System.Threading.Tasks;
@@ -24,9 +23,7 @@ namespace MusicStore.Controllers
         //
         // GET: /Account/Login
         [AllowAnonymous]
-        //Bug: https://github.com/aspnet/WebFx/issues/339
-        [HttpGet]
-        public IActionResult Login(string returnUrl=null)
+        public IActionResult Login(string returnUrl = null)
         {
             ViewBag.ReturnUrl = returnUrl;
             return View();
@@ -37,7 +34,7 @@ namespace MusicStore.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl=null)
+        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
         {
             if (ModelState.IsValid)
             {
@@ -63,8 +60,6 @@ namespace MusicStore.Controllers
         //
         // GET: /Account/Register
         [AllowAnonymous]
-        //Bug: https://github.com/aspnet/WebFx/issues/339
-        [HttpGet]
         public IActionResult Register()
         {
             return View();
@@ -83,7 +78,7 @@ namespace MusicStore.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    await SignInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -98,9 +93,7 @@ namespace MusicStore.Controllers
 
         //
         // GET: /Account/Manage
-        //Bug: https://github.com/aspnet/WebFx/issues/339
-        [HttpGet]
-        public IActionResult Manage(ManageMessageId? message=null)
+        public IActionResult Manage(ManageMessageId? message = null)
         {
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."

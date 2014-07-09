@@ -1,0 +1,20 @@
+{
+    "commands": {
+        "test": "Xunit.KRunner"
+    },
+    "dependencies": {
+        "Xunit.KRunner": "1.0.0-alpha2"
+    },
+    "configurations": {
+        "net45": {
+            "dependencies": {
+                "System.Runtime": "",
+                "System.Runtime.Extensions": "",
+                "System.Net.Http": "",
+                "System.Net.Http.WebRequest": "",
+                "System.Xml": "",
+                "System.Data": ""
+            }
+        }
+    }
+}

@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.AspNet.Identity.Entity;
 using Microsoft.Data.Entity;
-using Microsoft.Framework.DependencyInjection;
+using Microsoft.Framework.OptionsModel;
 
 namespace MusicStore.Models
 {
@@ -10,7 +10,7 @@ namespace MusicStore.Models
     public class ApplicationDbContext : IdentitySqlContext<ApplicationUser> 
     {
         public ApplicationDbContext(IServiceProvider serviceProvider, IOptionsAccessor<IdentityDbContextOptions> optionsAccessor)
-            : base(serviceProvider, optionsAccessor.Options.BuildConfiguration())
+            : base(serviceProvider, optionsAccessor.Options)
         {
 
         }

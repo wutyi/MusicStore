@@ -3,7 +3,6 @@ using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.FileSystems;
 using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Security;
 using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.AspNet.Routing;
 using Microsoft.AspNet.Security.Cookies;
@@ -79,7 +78,7 @@ namespace MusicStore.Spa
                 routes.MapRoute(null, "api/albums/mostPopular", new { controller = "AlbumsApi", action = "MostPopular" });
                 routes.MapRoute(null, "api/albums/all", new { controller = "AlbumsApi", action = "All" });
                 routes.MapRoute(null, "api/albums/{albumId}", new { controller = "AlbumsApi", action = "Details" });
-                routes.MapRoute(null, "{controller}/{action}", new { controller = "Home", action = "Index" });
+                routes.MapRoute(null, "{controller}/{action}/{id?}", new { controller = "Home", action = "Index" });
             });
         }
     }
