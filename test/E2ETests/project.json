@@ -3,7 +3,7 @@
         "test": "Xunit.KRunner"
     },
     "dependencies": {
-        "Xunit.KRunner": "1.0.0-alpha2"
+        "Xunit.KRunner": "1.0.0-*"
     },
     "configurations": {
         "net45": {
