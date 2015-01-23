@@ -5,6 +5,7 @@ using Microsoft.AspNet.Security;
 using Microsoft.Data.Entity;
 using Microsoft.Framework.ConfigurationModel;
 using Microsoft.Framework.DependencyInjection;
+using MusicStore.Apis;
 using MusicStore.Models;
 using MusicStore.Spa.Infrastructure;
 
@@ -32,11 +33,6 @@ namespace MusicStore.Spa
             // Add MVC services to the service container
             services.AddMvc();
 
-            services.Configure<MvcOptions>(options =>
-            {
-                options.ModelValidatorProviders.Add(typeof(BuddyValidatorProvider));
-            });
-
             // Add EF services to the service container
             services.AddEntityFramework()
                 .AddSqlServer()
@@ -61,6 +57,16 @@ namespace MusicStore.Spa
                 options.AddPolicy("app-ManageStore", new AuthorizationPolicyBuilder().RequiresClaim("app-ManageStore", "Allowed").Build());
             });
 
+#if ASPNET50
+            AutoMapper.Mapper.CreateMap<AlbumChangeDto, Album>();
+            AutoMapper.Mapper.CreateMap<Album, AlbumChangeDto>();
+            AutoMapper.Mapper.CreateMap<Album, AlbumResultDto>();
+            AutoMapper.Mapper.CreateMap<AlbumResultDto,Album>();
+            AutoMapper.Mapper.CreateMap<Artist, ArtistResultDto>();
+            AutoMapper.Mapper.CreateMap<ArtistResultDto, Artist>();
+            AutoMapper.Mapper.CreateMap<Genre, GenreResultDto>();
+            AutoMapper.Mapper.CreateMap<GenreResultDto, Genre>();
+#endif
         }
 
         public void Configure(IApplicationBuilder app)

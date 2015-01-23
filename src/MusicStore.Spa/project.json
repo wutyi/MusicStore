@@ -1,3 +1,18 @@
+Skip to content
+ This repository
+Explore
+Gist
+Blog
+Help
+Kirthi Krishnamraju kirthik
+ 
+127  Watch 
+  Star 297
+ Fork 170aspnet/MusicStore
+ branch: dev  MusicStore/src/MusicStore.Spa/project.json
+Wei WangChengTian 12 days ago React to kpm subcommand renaming
+4 contributors Damian EdwardsDavid FowlerHao KungWei Wang
+52 lines (52 sloc)  1.437 kb RawBlameHistory   
 {
   "webroot": "wwwroot",
   "exclude": [
@@ -50,3 +65,5 @@
     "aspnetcore50": {}
   }
 }
+Status API Training Shop Blog About
+© 2015 GitHub, Inc. Terms Privacy Security Contact
