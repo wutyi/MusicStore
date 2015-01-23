@@ -1,12 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using MusicStore.Infrastructure;
 using MusicStore.Models;
 using MusicStore.Spa.Infrastructure;
 #if ASPNET50
-using AutoMapper;
 #endif
 
 namespace MusicStore.Apis
@@ -28,20 +26,14 @@ namespace MusicStore.Apis
             await _storeContext.Genres.LoadAsync();
             await _storeContext.Artists.LoadAsync();
 
-            var albums = _storeContext.Albums;
+            var albums = await _storeContext.Albums
             //.Include(a => a.Genre)
             //.Include(a => a.Artist)
-#if ASPNET50
-            await albums.ToPagedListAsync(page, pageSize, sortBy,
-                    a => a.Title,                                    // sortExpression
-                    SortDirection.Ascending,                         // defaultSortDirection
-                    a => Mapper.Map(a, new AlbumResultDto()));       // selector
-#else
-            await albums.ToPagedListAsync(page, pageSize, sortBy,
+            .ToPagedListAsync(page, pageSize, sortBy,
                     a => a.Title,                                    // sortExpression
                     SortDirection.Ascending,                         // defaultSortDirection
                     a => SimpleMapper.Map(a, new AlbumResultDto())); // selector
-#endif
+
             return Json(albums);
         }
 
@@ -55,12 +47,7 @@ namespace MusicStore.Apis
                 .OrderBy(a => a.Title)
                 .ToListAsync();
 
-#if ASPNET50
-            return Json(albums.Select(a => Mapper.Map(a, new AlbumResultDto())));
-#else
             return Json(albums.Select(a => SimpleMapper.Map(a, new AlbumResultDto())));
-#endif
-
         }
 
         [HttpGet("mostPopular")]
@@ -74,12 +61,7 @@ namespace MusicStore.Apis
                 .ToListAsync();
 
             // TODO: Move the .Select() to end of albums query when EF supports it
-#if ASPNET50
-            return Json(albums.Select(a => Mapper.Map(a, new AlbumResultDto())));
-#else
             return Json(albums.Select(a => SimpleMapper.Map(a, new AlbumResultDto())));
-#endif
-
         }
 
         [HttpGet("{albumId:int}")]
@@ -95,11 +77,7 @@ namespace MusicStore.Apis
                 .Where(a => a.AlbumId == albumId)
                 .SingleOrDefaultAsync();
 
-#if ASPNET50
-            var albumResult = Mapper.Map<AlbumResultDto>(album);
-#else
             var albumResult = SimpleMapper.Map(album, new AlbumResultDto());
-#endif
 
             // TODO: Get these from the related entities when EF supports that again, i.e. when .Include() works
             //album.Artist.Name = (await _storeContext.Artists.SingleOrDefaultAsync(a => a.ArtistId == album.ArtistId)).Name;
@@ -122,7 +100,7 @@ namespace MusicStore.Apis
 
             // Save the changes to the DB
             var dbAlbum = new Album();
-            _storeContext.Albums.Add(SimpleMapper.Map(album, dbAlbum));
+			_storeContext.Albums.Add(SimpleMapper.Map(album, dbAlbum));
             await _storeContext.SaveChangesAsync();
 
             // TODO: Handle missing record, key violations, concurrency issues, etc.
@@ -155,13 +133,8 @@ namespace MusicStore.Apis
                 };
             }
 
-#if ASPNET50
-            // Save the changes to the DB
-            Mapper.Map(album, dbAlbum);
-#else
             // Save the changes to the DB
             SimpleMapper.Map(album, dbAlbum);
-#endif
             await _storeContext.SaveChangesAsync();
 
             // TODO: Handle missing record, key violations, concurrency issues, etc.
