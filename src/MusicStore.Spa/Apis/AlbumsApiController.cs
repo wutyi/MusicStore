@@ -4,8 +4,6 @@ using Microsoft.AspNet.Mvc;
 using MusicStore.Infrastructure;
 using MusicStore.Models;
 using MusicStore.Spa.Infrastructure;
-#if ASPNET50
-#endif
 
 namespace MusicStore.Apis
 {
