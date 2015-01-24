@@ -14,12 +14,8 @@ namespace MusicStore.Spa.Infrastructure
 
         public static TDest Map<TSource, TDest>(TSource source, TDest dest)
         {
-#if ASPNET50
-            return AutoMapper.Mapper.Map(source, dest);
-#else
             var map = (Func<TSource, TDest, TDest>)_mapCache.GetOrAdd(Tuple.Create(typeof(TSource), typeof(TDest)), _ => MakeMapMethod<TSource, TDest>());
             return map(source, dest);
-#endif
         }
 
         private static Func<TSource, TDest, TDest> MakeMapMethod<TSource, TDest>()

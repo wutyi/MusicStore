@@ -25,12 +25,12 @@ namespace MusicStore.Apis
             await _storeContext.Artists.LoadAsync();
 
             var albums = await _storeContext.Albums
-            //.Include(a => a.Genre)
-            //.Include(a => a.Artist)
+            //  .Include(a => a.Genre)
+            //  .Include(a => a.Artist)
             .ToPagedListAsync(page, pageSize, sortBy,
                     a => a.Title,                                    // sortExpression
                     SortDirection.Ascending,                         // defaultSortDirection
-                    a => SimpleMapper.Map(a, new AlbumResultDto())); // selector
+                    a => Mapper.Map(a, new AlbumResultDto())); // selector
 
             return Json(albums);
         }
@@ -45,7 +45,7 @@ namespace MusicStore.Apis
                 .OrderBy(a => a.Title)
                 .ToListAsync();
 
-            return Json(albums.Select(a => SimpleMapper.Map(a, new AlbumResultDto())));
+            return Json(albums.Select(a => Mapper.Map(a, new AlbumResultDto())));
         }
 
         [HttpGet("mostPopular")]
@@ -59,7 +59,7 @@ namespace MusicStore.Apis
                 .ToListAsync();
 
             // TODO: Move the .Select() to end of albums query when EF supports it
-            return Json(albums.Select(a => SimpleMapper.Map(a, new AlbumResultDto())));
+            return Json(albums.Select(a => Mapper.Map(a, new AlbumResultDto())));
         }
 
         [HttpGet("{albumId:int}")]
@@ -75,7 +75,7 @@ namespace MusicStore.Apis
                 .Where(a => a.AlbumId == albumId)
                 .SingleOrDefaultAsync();
 
-            var albumResult = SimpleMapper.Map(album, new AlbumResultDto());
+            var albumResult = Mapper.Map(album, new AlbumResultDto());
 
             // TODO: Get these from the related entities when EF supports that again, i.e. when .Include() works
             //album.Artist.Name = (await _storeContext.Artists.SingleOrDefaultAsync(a => a.ArtistId == album.ArtistId)).Name;
@@ -98,8 +98,7 @@ namespace MusicStore.Apis
 
             // Save the changes to the DB
             var dbAlbum = new Album();
-			_storeContext.Albums.Add(SimpleMapper.Map(album, dbAlbum));
-            await _storeContext.SaveChangesAsync();
+			_storeContext.Albums.Add(SimpleMapper.Map(album, dbAlbum));            await _storeContext.SaveChangesAsync();
 
             // TODO: Handle missing record, key violations, concurrency issues, etc.
 
@@ -132,7 +131,7 @@ namespace MusicStore.Apis
             }
 
             // Save the changes to the DB
-            SimpleMapper.Map(album, dbAlbum);
+            Mapper.Map(album, dbAlbum);
             await _storeContext.SaveChangesAsync();
 
             // TODO: Handle missing record, key violations, concurrency issues, etc.
