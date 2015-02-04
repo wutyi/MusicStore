@@ -6,7 +6,8 @@ using Microsoft.Data.Entity;
 using Microsoft.Framework.ConfigurationModel;
 using Microsoft.Framework.DependencyInjection;
 using AutoMapper;
-using MusicStore.Apis;using MusicStore.Models;
+using MusicStore.Apis;
+using MusicStore.Models;
 using MusicStore.Spa.Infrastructure;
 
 
@@ -65,7 +66,8 @@ namespace MusicStore.Spa
             Mapper.CreateMap<Artist, ArtistResultDto>();
             Mapper.CreateMap<ArtistResultDto, Artist>();
             Mapper.CreateMap<Genre, GenreResultDto>();
-            Mapper.CreateMap<GenreResultDto, Genre>();        }
+            Mapper.CreateMap<GenreResultDto, Genre>();
+        }
 
         public void Configure(IApplicationBuilder app)
         {
