@@ -5,9 +5,10 @@ using Microsoft.AspNet.Security;
 using Microsoft.Data.Entity;
 using Microsoft.Framework.ConfigurationModel;
 using Microsoft.Framework.DependencyInjection;
-using MusicStore.Apis;
-using MusicStore.Models;
+using AutoMapper;
+using MusicStore.Apis;using MusicStore.Models;
 using MusicStore.Spa.Infrastructure;
+
 
 namespace MusicStore.Spa
 {
@@ -20,7 +21,7 @@ namespace MusicStore.Spa
                         .AddEnvironmentVariables();
         }
 
-        public IConfiguration Configuration { get; set; }
+        public Microsoft.Framework.ConfigurationModel.IConfiguration Configuration { get; set; }
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -57,17 +58,14 @@ namespace MusicStore.Spa
                 options.AddPolicy("app-ManageStore", new AuthorizationPolicyBuilder().RequiresClaim("app-ManageStore", "Allowed").Build());
             });
 
-#if ASPNET50
-            AutoMapper.Mapper.CreateMap<AlbumChangeDto, Album>();
-            AutoMapper.Mapper.CreateMap<Album, AlbumChangeDto>();
-            AutoMapper.Mapper.CreateMap<Album, AlbumResultDto>();
-            AutoMapper.Mapper.CreateMap<AlbumResultDto,Album>();
-            AutoMapper.Mapper.CreateMap<Artist, ArtistResultDto>();
-            AutoMapper.Mapper.CreateMap<ArtistResultDto, Artist>();
-            AutoMapper.Mapper.CreateMap<Genre, GenreResultDto>();
-            AutoMapper.Mapper.CreateMap<GenreResultDto, Genre>();
-#endif
-        }
+			Mapper.CreateMap<AlbumChangeDto, Album>();
+            Mapper.CreateMap<Album, AlbumChangeDto>();
+            Mapper.CreateMap<Album, AlbumResultDto>();
+            Mapper.CreateMap<AlbumResultDto, Album>();
+            Mapper.CreateMap<Artist, ArtistResultDto>();
+            Mapper.CreateMap<ArtistResultDto, Artist>();
+            Mapper.CreateMap<Genre, GenreResultDto>();
+            Mapper.CreateMap<GenreResultDto, Genre>();        }
 
         public void Configure(IApplicationBuilder app)
         {

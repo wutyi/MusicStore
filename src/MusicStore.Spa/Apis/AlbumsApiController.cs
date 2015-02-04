@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
+using AutoMapper;
 using MusicStore.Infrastructure;
 using MusicStore.Models;
 using MusicStore.Spa.Infrastructure;
@@ -98,7 +99,8 @@ namespace MusicStore.Apis
 
             // Save the changes to the DB
             var dbAlbum = new Album();
-			_storeContext.Albums.Add(SimpleMapper.Map(album, dbAlbum));            await _storeContext.SaveChangesAsync();
+            _storeContext.Albums.Add(Mapper.Map(album, dbAlbum));
+			await _storeContext.SaveChangesAsync();
 
             // TODO: Handle missing record, key violations, concurrency issues, etc.
 
